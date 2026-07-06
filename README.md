@@ -115,6 +115,31 @@ The interactive API documentation will be available at:
 http://127.0.0.1:8000/docs
 ```
 
+### Run with Docker Compose
+
+Start the local development environment with:
+
+```powershell
+docker compose up --build
+```
+
+This starts the following services:
+
+* FastAPI backend on `http://127.0.0.1:8000`
+* PostgreSQL on port `5432`
+
+Check the health endpoint with:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8000/health
+```
+
+Stop the services with:
+
+```powershell
+docker compose down
+```
+
 ## Roadmap
 
 * Milestone 1 — Project Foundation
