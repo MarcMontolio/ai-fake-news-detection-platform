@@ -1,2 +1,43 @@
-# ai-fake-news-detection-platform
-Professional NLP platform for misinformation risk analysis, explainable fake news classification and credibility scoring.
+# AI Fake News Detection Platform
+
+A professional NLP and machine learning platform for misinformation risk analysis, explainable fake news classification, and credibility scoring.
+
+## Overview
+
+The **AI Fake News Detection Platform** is a backend and machine learning project designed to analyse news content and estimate misinformation risk using NLP, machine learning models, and transparent credibility signals.
+
+The goal is not to determine whether a claim is absolutely true or false. Instead, the platform provides an explainable risk assessment based on textual patterns, model confidence, source metadata, and credibility-related indicators.
+
+## Planned Features
+
+* FastAPI backend
+* PostgreSQL persistence
+* NLP preprocessing pipeline
+* Baseline scikit-learn classifier
+* Explainable predictions
+* Credibility scoring system
+* Redis and Celery for asynchronous processing
+* Dashboard for analysis and visualisation
+* Docker-based local development
+* CI with GitHub Actions
+
+## Project Status
+
+Initial project foundation in progress.
+
+## Roadmap
+
+* Milestone 1 — Project Foundation
+* Milestone 2 — Database and Domain Model
+* Milestone 3 — Dataset Pipeline
+* Milestone 4 — Baseline Machine Learning Model
+* Milestone 5 — Inference API
+* Milestone 6 — Explainability and Credibility Scoring
+* Milestone 7 — Async Processing and Dashboard
+* Milestone 8 — Advanced NLP and Portfolio Polish
+
+## Disclaimer
+
+This platform does not determine whether a claim is absolutely true or false. It estimates misinformation risk using machine learning models and credibility signals.
+
+The results should be interpreted as decision-support outputs, not as final fact-checking conclusions.
