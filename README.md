@@ -140,6 +140,40 @@ Stop the services with:
 docker compose down
 ```
 
+## Database Configuration
+
+The application reads PostgreSQL connection settings from environment variables.
+
+By default, the database URL is built from the following variables:
+
+* `POSTGRES_HOST`
+* `POSTGRES_PORT`
+* `POSTGRES_DB`
+* `POSTGRES_USER`
+* `POSTGRES_PASSWORD`
+
+An explicit `DATABASE_URL` can also be provided. When set, it takes priority over the individual PostgreSQL settings.
+
+Example SQLAlchemy URL format:
+
+```text
+postgresql+psycopg://fake_news_user:fake_news_password@localhost:5432/fake_news_platform
+```
+
+Application settings are defined in:
+
+```text
+packages/shared/config.py
+```
+
+Database engine and session configuration are defined in:
+
+```text
+packages/shared/database.py
+```
+
+Alembic migrations and database models are handled separately in later Milestone 2 issues.
+
 ## Roadmap
 
 * Milestone 1 — Project Foundation
