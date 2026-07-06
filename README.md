@@ -25,6 +25,70 @@ The goal is not to determine whether a claim is absolutely true or false. Instea
 
 Initial project foundation in progress.
 
+## Local Development
+
+This project uses Python 3.12 and a local virtual environment for development.
+
+### Create and activate the virtual environment
+
+On Windows PowerShell:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+### Install the project in development mode
+
+Once the virtual environment is active, install the project with its development dependencies:
+
+```powershell
+python -m pip install -e '.[dev]'
+```
+
+This installs the project in editable mode, which means local code changes are available without reinstalling the package.
+
+### Verify the environment
+
+You can verify that Python is running from the virtual environment with:
+
+```powershell
+python --version
+pip --version
+```
+
+### Run linting
+
+```powershell
+ruff check .
+```
+
+### Check formatting
+
+```powershell
+ruff format --check .
+```
+
+To automatically format the codebase:
+
+```powershell
+ruff format .
+```
+
+### Run tests
+
+```powershell
+pytest
+```
+
+### Deactivate the virtual environment
+
+When you are done working on the project, deactivate the environment with:
+
+```powershell
+deactivate
+```
+
 ## Roadmap
 
 * Milestone 1 — Project Foundation

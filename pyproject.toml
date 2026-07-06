@@ -1,0 +1,55 @@
+[project]
+name = "ai-fake-news-detection-platform"
+version = "0.1.0"
+description = "Professional NLP platform for misinformation risk analysis, explainable fake news classification and credibility scoring."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+authors = [
+    { name = "Marc Montolío" }
+]
+dependencies = [
+
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.8.0",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+src = ["apps", "packages", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "B",
+    "UP",
+    "SIM",
+]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["apps", "packages"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["apps*", "packages*"]
