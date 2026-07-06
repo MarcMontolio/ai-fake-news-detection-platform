@@ -23,7 +23,7 @@ The goal is not to determine whether a claim is absolutely true or false. Instea
 
 ## Project Status
 
-Initial project foundation in progress.
+Project foundation completed. Database and domain model development is currently in progress.
 
 ## Local Development
 
@@ -54,7 +54,7 @@ You can verify that Python is running from the virtual environment with:
 
 ```powershell
 python --version
-pip --version
+python -m pip --version
 ```
 
 ### Run linting
@@ -126,7 +126,10 @@ docker compose up --build
 This starts the following services:
 
 * FastAPI backend on `http://127.0.0.1:8000`
-* PostgreSQL on port `5432`
+* PostgreSQL on port `5433`
+
+Inside the Docker network, the API connects to PostgreSQL using `postgres:5432`.
+From the host machine, PostgreSQL is available on `localhost:5433`
 
 Check the health endpoint with:
 
@@ -157,7 +160,7 @@ An explicit `DATABASE_URL` can also be provided. When set, it takes priority ove
 Example SQLAlchemy URL format:
 
 ```text
-postgresql+psycopg://fake_news_user:fake_news_password@localhost:5432/fake_news_platform
+postgresql+psycopg://fake_news_user:fake_news_password@localhost:5433/fake_news_platform
 ```
 
 Application settings are defined in:
@@ -172,7 +175,45 @@ Database engine and session configuration are defined in:
 packages/shared/database.py
 ```
 
-Alembic migrations and database models are handled separately in later Milestone 2 issues.
+Alembic configuration is documented below. Database models are handled separately in later Milestone 2 issues.
+
+## Database Migrations
+
+This project uses Alembic to manage database schema migrations
+
+Alembic is configured to read the database connection URL from the project settings in `packages/shared/config.py`.
+
+To check the current database migration state:
+
+```powershell
+alembic current
+```
+
+To list available migrations:
+
+```powershell
+alembic history
+```
+
+To create a new migration manually:
+
+```powershell
+alembic revision -m "describe change"
+```
+
+To apply migrations:
+
+```powershell
+alembic upgrade head
+```
+
+To downgrade one migration:
+
+```powershell
+alembic downgrade -1
+```
+
+Database models are intentionally not included in the initial Alembic setup.
 
 ## Roadmap
 

@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     app_port: int = 8000
 
     postgres_host: str = "localhost"
-    postgres_port: int = 5432
+    postgres_port: int = 5433
     postgres_db: str = "fake_news_platform"
     postgres_user: str = "fake_news_user"
     postgres_password: str = "fake_news_password"

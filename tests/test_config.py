@@ -7,16 +7,16 @@ def test_settings_builds_default_sqlalchemy_database_url() -> None:
     assert (
         settings.sqlalchemy_database_url
         == "postgresql+psycopg://fake_news_user:fake_news_password"
-        "@localhost:5432/fake_news_platform"
+        "@localhost:5433/fake_news_platform"
     )
 
 
 def test_settings_uses_explicit_database_when_provided() -> None:
     settings = Settings(
-        database_url="postgresql+psycopg://user:password@postgres:5432/test_db"
+        database_url="postgresql+psycopg://user:password@postgres:5433/test_db"
     )
 
     assert (
         settings.sqlalchemy_database_url
-        == "postgresql+psycopg://user:password@postgres:5432/test_db"
+        == "postgresql+psycopg://user:password@postgres:5433/test_db"
     )

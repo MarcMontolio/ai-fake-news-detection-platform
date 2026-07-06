@@ -7,7 +7,7 @@ def test_database_engine_uses_configured_url() -> None:
     assert (
         engine.url.render_as_string(hide_password=False)
         == "postgresql+psycopg://fake_news_user:fake_news_password"
-        "@localhost:5432/fake_news_platform"
+        "@localhost:5433/fake_news_platform"
     )
 
 

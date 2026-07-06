@@ -8,6 +8,7 @@ authors = [
     { name = "Marc Montolío" }
 ]
 dependencies = [
+    "alembic>=1.18.4,<2.0.0",
     "fastapi>=0.115.0",
     "sqlalchemy>=2.0.51,<3.0.0",
     "psycopg[binary]>=3.3.4,<4.0.0",
