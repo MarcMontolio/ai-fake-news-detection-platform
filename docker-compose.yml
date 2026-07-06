@@ -4,8 +4,16 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: ai-fake-news-api
-    env_file:
-      - .env.example
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      APP_HOST: ${APP_HOST:-0.0.0.0}
+      APP_PORT: ${APP_PORT:-8000}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-fake_news_platform}
+      POSTGRES_USER: ${POSTGRES_USER:-fake_news_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-fake_news_password}
+      DATABASE_URL: ${DATABASE_URL:-}
     ports:
       - "${APP_PORT:-8000}:8000"
     depends_on:
