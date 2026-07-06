@@ -89,6 +89,32 @@ When you are done working on the project, deactivate the environment with:
 deactivate
 ```
 
+### Run the API locally
+
+Start the FastAPI development server with:
+
+```powershell
+python -m uvicorn apps.api.main:app --reload
+```
+
+The API will be available at:
+
+```text
+http://127.0.0.1:8000
+```
+
+Check the health endpoint with:
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8000/health
+```
+
+The interactive API documentation will be available at:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
 ## Roadmap
 
 * Milestone 1 — Project Foundation
