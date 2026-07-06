@@ -43,7 +43,7 @@ py -3.12 -m venv .venv
 Once the virtual environment is active, install the project with its development dependencies:
 
 ```powershell
-python -m pip install -e .[dev]"
+python -m pip install -e '.[dev]'
 ```
 
 This installs the project in editable mode, which means local code changes are available without reinstalling the package.
