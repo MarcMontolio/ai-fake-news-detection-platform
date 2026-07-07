@@ -9,7 +9,7 @@ REQUIRED_COLUMNS = {"title", "content", "label"}
 def load_raw_articles_from_csv(file_path: str | Path) -> list[RawArticleRecord]:
     path = Path(file_path)
 
-    with path.open(encoding="utf-8", newline="") as csv_file:
+    with path.open(encoding="utf-8-sig", newline="") as csv_file:
         reader = csv.DictReader(csv_file)
 
         if reader.fieldnames is None:
@@ -19,7 +19,7 @@ def load_raw_articles_from_csv(file_path: str | Path) -> list[RawArticleRecord]:
         missing_columns = REQUIRED_COLUMNS - set(reader.fieldnames)
 
         if missing_columns:
-            msg = f"CSV file is missing required columns {sorted(missing_columns)}"
+            msg = f"CSV file is missing required columns: {sorted(missing_columns)}"
             raise ValueError(msg)
 
         return [

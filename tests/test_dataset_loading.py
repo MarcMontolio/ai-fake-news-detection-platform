@@ -106,3 +106,22 @@ def test_load_raw_articles_from_csv_loads_multiple_rows(tmp_path: Path) -> None:
     assert record_1.label == "fake"
     assert record_2.title == "Test article 2"
     assert record_2.label == "real"
+
+
+def test_load_raw_articles_from_csv_handles_utf8_bom_headers(tmp_path: Path) -> None:
+    csv_path = tmp_path / "articles.csv"
+
+    csv_path.write_text(
+        "title,content,label,source,url\n"
+        "Test article,This is test content,fake,Test source,https://example.com/news/article\n",
+        encoding="utf-8-sig",
+    )
+
+    records = load_raw_articles_from_csv(csv_path)
+
+    assert len(records) == 1
+
+    record = records[0]
+
+    assert record.title == "Test article"
+    assert record.label == "fake"
