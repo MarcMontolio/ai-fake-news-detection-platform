@@ -1,5 +1,7 @@
 from packages.shared.db.models.analysis import Analysis
 from packages.shared.db.models.article import Article
+from packages.shared.db.models.explanation import Explanation
+from packages.shared.db.models.source import Source
 
 
 def test_article_model_has_expected_table_name() -> None:
@@ -42,3 +44,49 @@ def test_article_analysis_relationship_is_configured() -> None:
     foreign_key = next(iter(foreign_keys))
 
     assert foreign_key.target_fullname == "articles.id"
+
+
+def test_explanation_model_has_expected_name() -> None:
+    assert Explanation.__tablename__ == "explanations"
+
+
+def test_source_model_has_expected_name() -> None:
+    assert Source.__tablename__ == "sources"
+
+
+def test_explanation_model_has_expected_columns() -> None:
+    assert list(Explanation.__table__.columns.keys()) == [
+        "id",
+        "analysis_id",
+        "feature",
+        "impact",
+        "weight",
+    ]
+
+
+def test_source_model_has_expected_columns() -> None:
+    assert list(Source.__table__.columns.keys()) == [
+        "id",
+        "domain",
+        "credibility_score",
+        "bias_label",
+        "factuality_label",
+        "notes",
+        "updated_at",
+    ]
+
+
+def test_explanation_analysis_relationship_is_configured() -> None:
+    foreign_keys = Explanation.__table__.columns["analysis_id"].foreign_keys
+
+    foreign_key = next(iter(foreign_keys))
+
+    assert foreign_key.target_fullname == "analyses.id"
+
+
+def test_source_domain_is_unique() -> None:
+    assert Source.__table__.columns["domain"].unique is True
+
+
+def test_source_domain_has_index() -> None:
+    assert Source.__table__.columns["domain"].index is True

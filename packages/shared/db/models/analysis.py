@@ -10,6 +10,7 @@ from packages.shared.db.base import Base
 
 if TYPE_CHECKING:
     from packages.shared.db.models.article import Article
+    from packages.shared.db.models.explanation import Explanation
 
 
 class Analysis(Base):
@@ -28,4 +29,7 @@ class Analysis(Base):
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )
 
-    article: Mapped[Article] = relationship(back_populates="analyses")
+    article: Mapped[Article] = relationship("Article", back_populates="analyses")
+    explanations: Mapped[list[Explanation]] = relationship(
+        "Explanation", back_populates="analysis", cascade="all, delete-orphan"
+    )

@@ -25,5 +25,5 @@ class Article(Base):
     )
 
     analyses: Mapped[list[Analysis]] = relationship(
-        back_populates="article", cascade="all, delete-orphan"
+        "Analysis", back_populates="article", cascade="all, delete-orphan"
     )
