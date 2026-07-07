@@ -90,3 +90,7 @@ def test_source_domain_is_unique() -> None:
 
 def test_source_domain_has_index() -> None:
     assert Source.__table__.columns["domain"].index is True
+
+
+def test_source_updated_at_has_onupdate_value() -> None:
+    assert Source.__table__.columns["updated_at"].onupdate is not None
