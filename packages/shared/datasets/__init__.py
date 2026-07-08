@@ -12,6 +12,7 @@ from packages.shared.datasets.schemas import (
     RawArticleRecord,
 )
 from packages.shared.datasets.splitting import split_dataset, validate_test_size
+from packages.shared.datasets.writing import write_processed_articles_to_csv
 
 __all__ = [
     "DatasetLabel",
@@ -25,4 +26,5 @@ __all__ = [
     "preprocess_raw_articles",
     "split_dataset",
     "validate_test_size",
+    "write_processed_articles_to_csv",
 ]
