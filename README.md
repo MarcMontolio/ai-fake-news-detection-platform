@@ -179,7 +179,7 @@ Alembic configuration is documented below. Database models and repository utilit
 
 ## Database Migrations
 
-This project uses Alembic to manage database schema migrations
+This project uses Alembic to manage database schema migrations.
 
 Alembic is configured to read the database connection URL from the project settings in `packages/shared/config.py`.
 
@@ -238,7 +238,7 @@ Raw labels are normalized during preprocessing, so values such as `FAKE`, `REAL`
 To prepare a dataset, place the raw CSV file under `data/raw/` and run:
 
 ```powershell
-python scripts/prepare_dataset.py --input-csv data/raw/articles.csv --output-dir data/processed
+python -m scripts.prepare_dataset --input-csv data/raw/articles.csv --output-dir data/processed
 ```
 
 The script loads the raw CSV file, preprocesses article text and labels, creates a reproducible train/test split, and writes the processed outputs to:
@@ -253,7 +253,7 @@ The default test split size is `0.2` and the default random seed is `42`.
 You can override them with:
 
 ```powershell
-python scripts/prepare_dataset.py --input-csv data/raw/articles.csv --output-dir data/processed --test-size 0.2 --seed 42
+python -m scripts.prepare_dataset --input-csv data/raw/articles.csv --output-dir data/processed --test-size 0.2 --seed 42
 ```
 
 Generated datasets should not be committed to the repository. Keep only placeholder files such as `.gitkeep` under `data/raw/` and `data/processed/`.
