@@ -23,7 +23,7 @@ The goal is not to determine whether a claim is absolutely true or false. Instea
 
 ## Project Status
 
-Project foundation completed. Database and domain model development is currently in progress.
+Project foundation and database/domain model development are completed. Dataset pipeline development is currently in progress.
 
 ## Local Development
 
@@ -175,11 +175,11 @@ Database engine and session configuration are defined in:
 packages/shared/database.py
 ```
 
-Alembic configuration is documented below. Database models are handled separately in later Milestone 2 issues.
+Alembic configuration is documented below. Database models and repository utilities are defined under `packages/shared/db`.
 
 ## Database Migrations
 
-This project uses Alembic to manage database schema migrations
+This project uses Alembic to manage database schema migrations.
 
 Alembic is configured to read the database connection URL from the project settings in `packages/shared/config.py`.
 
@@ -213,7 +213,50 @@ To downgrade one migration:
 alembic downgrade -1
 ```
 
-Database models are intentionally not included in the initial Alembic setup.
+## Dataset Preparation
+
+The dataset pipeline prepares raw labelled news articles for future machine learning training.
+
+The expected raw input format is a CSV file with the following required columns:
+
+* `title`
+* `content`
+* `label`
+
+The following columns are optional:
+
+* `source`
+* `url`
+
+Supported internal labels are:
+
+* `fake`
+* `real`
+
+Raw labels are normalized during preprocessing, so values such as `FAKE`, `REAL` or labels with surrounding spaces are converted to the internal label format when supported.
+
+To prepare a dataset, place the raw CSV file under `data/raw/` and run:
+
+```powershell
+python -m scripts.prepare_dataset --input-csv data/raw/articles.csv --output-dir data/processed
+```
+
+The script loads the raw CSV file, preprocesses article text and labels, creates a reproducible train/test split, and writes the processed outputs to:
+
+```text
+data/processed/train.csv
+data/processed/test.csv
+```
+
+The default test split size is `0.2` and the default random seed is `42`.
+
+You can override them with:
+
+```powershell
+python -m scripts.prepare_dataset --input-csv data/raw/articles.csv --output-dir data/processed --test-size 0.2 --seed 42
+```
+
+Generated datasets should not be committed to the repository. Keep only placeholder files such as `.gitkeep` under `data/raw/` and `data/processed/`.
 
 ## Roadmap
 
