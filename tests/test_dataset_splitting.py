@@ -93,3 +93,19 @@ def test_split_dataset_rejects_invalid_test_size() -> None:
 
     with pytest.raises(ValueError):
         split_dataset(records, test_size=1.5, seed=42)
+
+
+def test_split_dataset_rejects_too_few_records() -> None:
+    records = create_processed_records(1)
+
+    with pytest.raises(ValueError):
+        split_dataset(records, test_size=0.2, seed=42)
+
+
+def test_split_dataset_keeps_test_split_non_empty_for_small_datasets() -> None:
+    records = create_processed_records(4)
+
+    train_records, test_records = split_dataset(records, test_size=0.2, seed=42)
+
+    assert len(train_records) == 3
+    assert len(test_records) == 1
