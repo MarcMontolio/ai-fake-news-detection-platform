@@ -10,7 +10,7 @@ class RawArticleRecord(BaseModel):
 
     title: str = Field(min_length=1)
     content: str = Field(min_length=1)
-    label: DatasetLabel
+    label: str = Field(min_length=1)
     source: str | None = Field(default=None, min_length=1)
     url: HttpUrl | None = None
 

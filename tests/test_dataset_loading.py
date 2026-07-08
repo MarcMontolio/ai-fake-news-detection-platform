@@ -57,7 +57,7 @@ def test_load_raw_articles_from_csv_rejects_invalid_row_data(tmp_path: Path) -> 
 
     csv_path.write_text(
         "title,content,label,source,url\n"
-        "Test article,This is test content,misleading,Test source,https://example.com/news/article\n",
+        ",This is test content,fake,Test source,https://example.com/news/article\n",
         encoding="utf-8",
     )
 
@@ -125,3 +125,21 @@ def test_load_raw_articles_from_csv_handles_utf8_bom_headers(tmp_path: Path) -> 
 
     assert record.title == "Test article"
     assert record.label == "fake"
+
+
+def test_load_raw_articles_from_csv_accepts_raw_label_values(tmp_path: Path) -> None:
+    csv_path = tmp_path / "articles.csv"
+
+    csv_path.write_text(
+        "title,content,label,source,url\n"
+        "Test article,This is test content, REAL ,Test source,https://example.com/news/article\n",
+        encoding="utf-8-sig",
+    )
+
+    records = load_raw_articles_from_csv(csv_path)
+
+    assert len(records) == 1
+
+    record = records[0]
+
+    assert record.label == " REAL "

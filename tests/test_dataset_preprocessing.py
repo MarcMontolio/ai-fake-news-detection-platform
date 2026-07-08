@@ -119,3 +119,30 @@ def test_preprocess_raw_articles_processes_multiple_records() -> None:
     assert processed_article_records[1].label == "real"
     assert processed_article_records[1].source == raw_article_record_2.source
     assert processed_article_records[1].url == raw_article_record_2.url
+
+
+def test_preprocess_raw_article_normalizes_raw_label() -> None:
+    raw_article_record = RawArticleRecord(
+        title="Test article",
+        content="This is test content",
+        label=" REAL ",
+        source="Test source",
+        url="https://example.com/news/article",
+    )
+
+    processed_article_record = preprocess_raw_article(raw_article_record)
+
+    assert processed_article_record.label == "real"
+
+
+def test_preprocess_raw_article_rejects_unsupported_label() -> None:
+    raw_article_record = RawArticleRecord(
+        title="Test article",
+        content="This is test content",
+        label="misleading",
+        source="Test source",
+        url="https://example.com/news/article",
+    )
+
+    with pytest.raises(ValueError):
+        preprocess_raw_article(raw_article_record)

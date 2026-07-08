@@ -20,13 +20,12 @@ def test_raw_article_record_accepts_valid_data() -> None:
     assert str(record.url) == "https://example.com/news/article"
 
 
-def test_raw_article_record_rejects_invalid_label() -> None:
-    with pytest.raises(ValidationError):
-        RawArticleRecord(
-            title="Test article",
-            content="This is test content",
-            label="misleading",
-        )
+def test_raw_article_record_accepts_raw_label_string() -> None:
+    record = RawArticleRecord(
+        title="Test article", content="This is test content", label=" REAL "
+    )
+
+    assert record.label == " REAL "
 
 
 def test_raw_article_record_rejects_empty_title() -> None:
