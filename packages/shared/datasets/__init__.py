@@ -11,6 +11,7 @@ from packages.shared.datasets.schemas import (
     ProcessedArticleRecord,
     RawArticleRecord,
 )
+from packages.shared.datasets.splitting import split_dataset, validate_test_size
 
 __all__ = [
     "DatasetLabel",
@@ -22,4 +23,6 @@ __all__ = [
     "normalize_label",
     "preprocess_raw_article",
     "preprocess_raw_articles",
+    "split_dataset",
+    "validate_test_size",
 ]
