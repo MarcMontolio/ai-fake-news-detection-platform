@@ -12,12 +12,26 @@ def evaluate_predictions(
 ) -> dict[str, float]:
     accuracy_value = accuracy_score(true_labels, predicted_labels)
     precision_value = precision_score(
-        true_labels, predicted_labels, average="macro", zero_division=0
+        true_labels,
+        predicted_labels,
+        labels=["fake", "real"],
+        average="macro",
+        zero_division=0,
     )
     recall_value = recall_score(
-        true_labels, predicted_labels, average="macro", zero_division=0
+        true_labels,
+        predicted_labels,
+        labels=["fake", "real"],
+        average="macro",
+        zero_division=0,
     )
-    f1_value = f1_score(true_labels, predicted_labels, average="macro", zero_division=0)
+    f1_value = f1_score(
+        true_labels,
+        predicted_labels,
+        labels=["fake", "real"],
+        average="macro",
+        zero_division=0,
+    )
 
     metrics = {
         "accuracy": float(accuracy_value),

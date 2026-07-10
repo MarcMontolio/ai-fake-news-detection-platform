@@ -45,3 +45,15 @@ def test_build_confusion_matrix_returns_expected_matrix() -> None:
     matrix = build_confusion_matrix(true_labels, predicted_labels)
 
     assert matrix == [[1, 1], [1, 1]]
+
+
+def test_evaluate_predictions_includes_supported_labels_for_macro_metrics() -> None:
+    true_labels = ["fake", "fake"]
+    predicted_labels = ["fake", "fake"]
+
+    metrics = evaluate_predictions(true_labels, predicted_labels)
+
+    assert metrics["accuracy"] == 1.0
+    assert metrics["precision"] == 0.5
+    assert metrics["recall"] == 0.5
+    assert metrics["f1"] == 0.5
